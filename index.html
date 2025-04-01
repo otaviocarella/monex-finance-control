@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monex - Controle suas Finanças de Forma Inteligente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
+</head>
+
+<body>
+    <!-- Cursor Customizado -->
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+
+    <!-- Toggle de tema claro/escuro -->
+    <div class="mode-toggle" id="modeToggle">
+        <div class="icon">
+            <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Navegação -->
+    <div class="nav-menu" id="navMenu">
+        <div class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-menu-items">
+            <div class="nav-item active" data-section="hero">
+                <i>🏠</i> Início
+            </div>
+            <div class="nav-item" data-section="features">
+                <i>✨</i> Recursos
+            </div>
+            <div class="nav-item" data-section="testimonials">
+                <i>💬</i> Depoimentos
+            </div>
+            <div class="nav-item" data-section="download">
+                <i>📱</i> Download
+            </div>
+        </div>
+    </div>
+
+    <!-- Background de partículas -->
+    <div id="canvas-container"></div>
+
+    <!-- Seção Hero -->
+    <section id="hero" class="section">
+        <div class="container mx-auto">
+            <div class="flex flex-col lg:flex-row items-center justify-between">
+                <div class="lg:w-1/2 mb-10 lg:mb-0 text-center lg:text-left">
+                    <h1 class="text-4xl lg:text-6xl font-bold mb-6" id="typing-text"></h1>
+                    <p class="text-lg mb-8 opacity-80 max-w-xl">
+                        Transforme sua vida financeira com o app mais completo do mercado. Gerencie investimentos,
+                        economize e alcance a liberdade financeira com ferramentas inteligentes.
+                    </p>
+                    <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
+                        <a href="#features" class="btn-primary">Conhecer recursos</a>
+                        <a href="#download" class="btn-secondary">Download</a>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 flex justify-center">
+                    <div class="phone-mockup" id="phoneMockup">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <div class="screen-content">
+                                <div class="card balance-card">
+                                    <div class="card-title">Saldo Total</div>
+                                    <div class="balance">R$ 12.548,75</div>
+                                </div>
+
+                                <div class="card transaction-card">
+                                    <div class="transaction-icon"
+                                        style="background: rgba(255, 92, 92, 0.1); color: #ff5c5c;">📉</div>
+                                    <div class="transaction-details">
+                                        <div class="transaction-name">Restaurante</div>
+                                        <div class="transaction-date">Hoje, 13:45</div>
+                                    </div>
+                                    <div class="transaction-amount expense">- R$ 78,90</div>
+                                </div>
+
+                                <div class="card transaction-card">
+                                    <div class="transaction-icon"
+                                        style="background: rgba(46, 204, 113, 0.1); color: #2ecc71;">📈</div>
+                                    <div class="transaction-details">
+                                        <div class="transaction-name">Salário</div>
+                                        <div class="transaction-date">Hoje, 08:12</div>
+                                    </div>
+                                    <div class="transaction-amount income">+ R$ 4.850,00</div>
+                                </div>
+
+                                <div class="card transaction-card">
+                                    <div class="transaction-icon"
+                                        style="background: rgba(255, 92, 92, 0.1); color: #ff5c5c;">📉</div>
+                                    <div class="transaction-details">
+                                        <div class="transaction-name">Supermercado</div>
+                                        <div class="transaction-date">Ontem, 16:30</div>
+                                    </div>
+                                    <div class="transaction-amount expense">- R$ 246,75</div>
+                                </div>
+
+                                <div class="card transaction-card">
+                                    <div class="transaction-icon"
+                                        style="background: rgba(255, 92, 92, 0.1); color: #ff5c5c;">📉</div>
+                                    <div class="transaction-details">
+                                        <div class="transaction-name">Internet</div>
+                                        <div class="transaction-date">04/04, 11:20</div>
+                                    </div>
+                                    <div class="transaction-amount expense">- R$ 129,90</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Recursos -->
+    <section id="features" class="section">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl lg:text-5xl font-bold mb-4">Recursos Avançados</h2>
+                <p class="text-lg opacity-80 max-w-2xl mx-auto">Descubra como o Monex pode revolucionar sua vida
+                    financeira com estas ferramentas inovadoras.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-card" data-delay="0">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="text-xl font-bold mb-3">Análise Inteligente</h3>
+                    <p class="opacity-80">IA que analisa seus gastos e sugere formas de economizar com base no seu
+                        perfil.</p>
+                </div>
+
+                <div class="feature-card" data-delay="0.1">
+                    <div class="feature-icon">🔮</div>
+                    <h3 class="text-xl font-bold mb-3">Previsão Financeira</h3>
+                    <p class="opacity-80">Veja projeções do seu patrimônio baseadas em seus hábitos financeiros atuais.
+                    </p>
+                </div>
+
+                <div class="feature-card" data-delay="0.2">
+                    <div class="feature-icon">🏦</div>
+                    <h3 class="text-xl font-bold mb-3">Multi-Bancos</h3>
+                    <p class="opacity-80">Conecte contas de diferentes instituições financeiras em um só lugar.</p>
+                </div>
+
+                <div class="feature-card" data-delay="0.3">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="text-xl font-bold mb-3">Metas Personalizadas</h3>
+                    <p class="opacity-80">Defina metas financeiras e receba um plano detalhado para alcançá-las.</p>
+                </div>
+
+                <div class="feature-card" data-delay="0.4">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="text-xl font-bold mb-3">Segurança Avançada</h3>
+                    <p class="opacity-80">Proteção de dados com criptografia de nível bancário e autenticação
+                        biométrica.</p>
+                </div>
+
+                <div class="feature-card" data-delay="0.5">
+                    <div class="feature-icon">🔄</div>
+                    <h3 class="text-xl font-bold mb-3">Sincronização Automática</h3>
+                    <p class="opacity-80">Dados atualizados em tempo real entre todos os seus dispositivos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Depoimentos -->
+    <section id="testimonials" class="section">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl lg:text-5xl font-bold mb-4">O Que Nossos Usuários Dizem</h2>
+                <p class="text-lg opacity-80 max-w-2xl mx-auto">Milhares de pessoas transformaram suas finanças com o
+                    Monex. Confira algumas histórias.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="testimonial-card" data-delay="0">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="opacity-90">"O Monex mudou minha relação com dinheiro. Em apenas 6 meses, consegui
+                        economizar para a entrada do meu apartamento graças às análises inteligentes e dicas
+                        personalizadas."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MC</div>
+                        <div class="author-info">
+                            <h4>Marcos C.</h4>
+                            <p>Designer, 32 anos</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-delay="0.1">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="opacity-90">"A integração entre bancos é perfeita! Antes eu perdia horas organizando
+                        minhas finanças, agora é tudo automático e as previsões financeiras são surpreendentemente
+                        precisas."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AS</div>
+                        <div class="author-info">
+                            <h4>Amanda S.</h4>
+                            <p>Advogada, 38 anos</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-delay="0.2">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="opacity-90">"Como empreendedor, preciso ter controle total sobre meu fluxo de caixa. O
+                        Monex tornou isso incrivelmente simples e me ajudou a identificar oportunidades de
+                        investimento."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RO</div>
+                        <div class="author-info">
+                            <h4>Ricardo O.</h4>
+                            <p>Empresário, 41 anos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Download -->
+    <section id="download" class="section">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl lg:text-5xl font-bold mb-4">Pronto para Transformar Suas Finanças?</h2>
+                <p class="text-lg opacity-80 max-w-2xl mx-auto">Baixe o Monex agora e comece a jornada rumo à sua
+                    liberdade financeira.</p>
+
+                <div class="flex justify-center mt-8">
+                    <div class="download-buttons">
+                        <div class="app-store-btn">
+                            <div class="store-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M17.0393 13.5967C17.0136 10.6717 19.489 9.30302 19.6 9.24122C18.3322 7.37402 16.3594 7.08862 15.6581 7.06742C13.9507 6.89642 12.3045 8.05962 11.4391 8.05962C10.5574 8.05962 9.21508 7.08682 7.75933 7.11682C5.87741 7.14622 4.13611 8.23582 3.20374 9.92822C1.27322 13.3723 2.71958 18.4776 4.57592 21.3489C5.50829 22.7632 6.60625 24.358 8.06261 24.304C9.48035 24.2446 10.0158 23.4065 11.7239 23.4065C13.4166 23.4065 13.9194 24.304 15.4074 24.2693C16.9383 24.2446 17.8864 22.8324 18.7831 21.4062C19.8723 19.7702 20.3129 18.1668 20.3355 18.0889C20.3009 18.0758 17.0686 16.8979 17.0393 13.5967Z"
+                                        fill="currentColor" />
+                                    <path
+                                        d="M14.2766 4.80462C15.0467 3.84622 15.5667 2.52762 15.4319 1.18262C14.3272 1.22562 12.9408 1.94622 12.1353 2.88082C11.4251 3.71162 10.7989 5.08442 10.9531 6.36642C12.1873 6.45642 13.4731 5.74742 14.2766 4.80462Z"
+                                        fill="currentColor" />
+                                </svg>
+                            </div>
+                            <div class="store-text">
+                                <small>Baixe na</small>
+                                <span>App Store</span>
+                            </div>
+                        </div>
+
+                        <div class="play-store-btn">
+                            <div class="store-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M1.22363 0.29657C0.933625 0.606783 0.75 1.08356 0.75 1.68548V22.3142C0.75 22.9161 0.933625 23.3929 1.22363 23.7031L1.31641 23.7959L13.5762 11.5361V11.4639L1.31641 -0.796074L1.22363 0.29657Z"
+                                        fill="currentColor" />
+                                    <path
+                                        d="M17.7744 15.748L13.5762 11.5498V11.4775L17.7744 7.2793L17.8877 7.34375L22.8779 10.2334C24.2402 11.002 24.2402 12.0254 22.8779 12.7939L17.8877 15.6836L17.7744 15.748Z"
+                                        fill="currentColor" />
+                                    <path
+                                        d="M17.8877 15.6836L13.5762 11.3721L1.22363 23.7246C1.6875 24.209 2.43457 24.2783 3.30762 23.8086L17.8877 15.6836Z"
+                                        fill="currentColor" />
+                                    <path
+                                        d="M17.8877 7.34375L3.30762 -0.78125C2.43457 -1.25098 1.6875 -1.18164 1.22363 0.275391L13.5762 11.3721L17.8877 7.34375Z"
+                                        fill="currentColor" />
+                                </svg>
+                            </div>
+                            <div class="store-text">
+                                <small>Disponível no</small>
+                                <span>Google Play</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
